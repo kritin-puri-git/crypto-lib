@@ -3,6 +3,7 @@ package io.github.kritin_puri_git.crypto.encryption.service.impl;
 import io.github.kritin_puri_git.crypto.encryption.algorithm.EncryptionAlgorithm;
 import io.github.kritin_puri_git.crypto.encryption.algorithm.registry.EncryptionVersionRegistry;
 import io.github.kritin_puri_git.crypto.encryption.model.EncryptionData;
+import io.github.kritin_puri_git.crypto.encryption.model.EncryptionRequest;
 import io.github.kritin_puri_git.crypto.encryption.model.EncryptionResult;
 import io.github.kritin_puri_git.crypto.encryption.model.EncryptionResultMap;
 import io.github.kritin_puri_git.crypto.encryption.service.EncryptionService;
@@ -41,6 +42,18 @@ public class EncryptionServiceImpl implements EncryptionService {
                 encryptionData.encryptedData(),
                 encryptionData.keyId(),
                 activeVersion
+        );
+    }
+
+    @Override
+    public byte[] encrypt(final EncryptionRequest request){
+        Validation.validate(request, "request", CLASS_NAME);
+        final EncryptionAlgorithm activeEncryptionAlgorithm = this.encryptionAlgorithms.get(request.version());
+        Validation.validate(activeEncryptionAlgorithm, "activeEncryptionAlgorithm", CLASS_NAME);
+
+        return activeEncryptionAlgorithm.encrypt(
+                request.plainData(),
+                request.keyId()
         );
     }
 

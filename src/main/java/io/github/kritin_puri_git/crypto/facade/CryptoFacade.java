@@ -1,5 +1,6 @@
 package io.github.kritin_puri_git.crypto.facade;
 
+import io.github.kritin_puri_git.crypto.encryption.model.EncryptionRequest;
 import io.github.kritin_puri_git.crypto.encryption.model.EncryptionResult;
 import io.github.kritin_puri_git.crypto.encryption.model.EncryptionResultMap;
 import io.github.kritin_puri_git.crypto.encryption.service.EncryptionService;
@@ -35,6 +36,29 @@ public class CryptoFacade {
 
     public boolean isLatestEncryption(short keyId, short version){
         return this.encryptionService.isLatest(keyId, version);
+    }
+
+    public EncryptionResult encrypt(String data){
+        Validation.validate(data, "data", CLASS_NAME);
+
+        EncryptionResult result = this.encryptionService.encrypt(data);
+
+        Validation.validate(result, "result", CLASS_NAME);
+
+        return result;
+    }
+
+    public byte[] encrypt(String data, short keyId, short version){
+        Validation.validate(data, "data", CLASS_NAME);
+
+        byte[] encryptedData = this.encryptionService.encrypt(
+                new EncryptionRequest(
+                        data, keyId, version
+                )
+        );
+        Validation.validate(encryptedData, "encryptedData", CLASS_NAME);
+
+        return encryptedData;
     }
 
     public EncryptionResultMap encryptDataMap(

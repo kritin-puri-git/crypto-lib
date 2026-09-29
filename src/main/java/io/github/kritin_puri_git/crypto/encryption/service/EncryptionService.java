@@ -1,5 +1,6 @@
 package io.github.kritin_puri_git.crypto.encryption.service;
 
+import io.github.kritin_puri_git.crypto.encryption.model.EncryptionRequest;
 import io.github.kritin_puri_git.crypto.encryption.model.EncryptionResult;
 import io.github.kritin_puri_git.crypto.encryption.model.EncryptionResultMap;
 
@@ -11,13 +12,13 @@ public interface EncryptionService {
 
     EncryptionResultMap encrypt(Map<String, String> dataMap);
 
+    public byte[] encrypt(final EncryptionRequest request);
+
     String decrypt(EncryptionResult encryptionResult);
 
     Map<String, String> decrypt(EncryptionResultMap encryptionResultMap);
 
-
     EncryptionResultMap rotate(EncryptionResultMap encryptionResultMap);
 
     boolean isLatest(short keyId, short version);
-
 }
