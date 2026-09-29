@@ -84,6 +84,25 @@
 				</executions>
 			</plugin>
 
+			<!-- GPG -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>3.2.8</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>C:\Program Files\GnuPG\bin\gpg.exe</executable>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
