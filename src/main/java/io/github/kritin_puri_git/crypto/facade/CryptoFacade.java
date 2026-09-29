@@ -81,11 +81,14 @@ public class CryptoFacade {
         return encryptedDataMap;
     }
 
-    public String decrypt(EncryptionResult encryptedData){
+    public String decrypt(byte[] encryptedData, short keyId, short version){
         Validation.validate(encryptedData, "encryptedData", CLASS_NAME);
 
+        EncryptionResult encryptionResult = new EncryptionResult(
+                encryptedData, keyId, version
+        );
         String decryptedData = this.encryptionService.decrypt(
-                encryptedData
+                encryptionResult
         );
 
         Validation.validate(decryptedData, "decryptedData", CLASS_NAME);
