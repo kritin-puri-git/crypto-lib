@@ -50,6 +50,8 @@
 
 	<build>
 		<plugins>
+
+			<!-- Spring Boot -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -58,6 +60,7 @@
 				</configuration>
 			</plugin>
 
+			<!-- Sources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -71,6 +74,7 @@
 				</executions>
 			</plugin>
 
+			<!-- Javadocs -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -100,6 +104,17 @@
 				</executions>
 				<configuration>
 					<executable>C:\Program Files\GnuPG\bin\gpg.exe</executable>
+				</configuration>
+			</plugin>
+
+			<!-- Maven Central -->
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.11.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>maven-central</publishingServerId>
 				</configuration>
 			</plugin>
 
